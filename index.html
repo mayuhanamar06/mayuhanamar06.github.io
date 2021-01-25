@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="style7.css">
+	<!-- ボタンCSSの参照先 http://www.htmq.com/csskihon/004.shtml -->
+	<style type="text/css">
+		.square_btn{
+			display: inline-block;
+			padding: 0.5em 1em;
+			text-decoration: none;
+			background: #668ad8;/*ボタン色*/
+			color: #FFF;
+			border-bottom: solid 4px #627295;
+			border-radius: 3px;
+		}
+		.square_btn:active {/*ボタンを押したとき*/
+			-ms-transform: translateY(4px);
+			-webkit-transform: translateY(4px);
+			transform: translateY(4px);/*下に動く*/
+			border-bottom: none;/*線を消す*/
+		}
+	</style>
+	<title>JavaScriptたこ焼きガチャ</title>
+</head>
+<body>
+<h1>たこ焼きガチャ</h1>
+
+<script>
+var no_rare = 0;
+var no_ssrare = 0;
+var no_usrare = 0;
+var no_uusrare = 0;
+function gatcha() {
+    for( var i=0; i<5; i++ ) {
+        var id = ('00000' + i).slice(-2)
+	    var img = document.getElementById("card"+id); 
+	    var number = Math.floor(100*Math.random());
+	    if( number < 50 ) {
+	    	img.src = "tako1.jpg";
+	    	no_rare++;
+	    } else if( number < 90 ) {
+	    	img.src = "tako3.jpg";
+	      	no_ssrare++;
+	    } else if( number < 97 ){
+	       	img.src = "tako5.jpg";
+	     	no_usrare++;
+	    } else {
+	        alert("やったね!！");
+	        img.src = "tako6.jpg";
+	        no_uusrare++;
+	    }
+	}
+	var total = no_rare + no_ssrare + no_usrare + no_uusrare;
+	document.getElementById("price").innerHTML = total*100+"円";
+	document.getElementById("no_rare").innerHTML = no_rare+"枚（確率"+Math.round(no_rare/total*100*100)/100+"％）";
+	document.getElementById("no_ssrare").innerHTML = no_ssrare+"枚（確率"+Math.round(no_ssrare/total*100*100)/100+"％）";
+	document.getElementById("no_usrare").innerHTML = no_usrare+"枚（確率"+Math.round(no_usrare/total*100*100)/100+"％）";
+    document.getElementById("no_uusrare").innerHTML = no_uusrare+"枚 (確率"+Math.round(no_uusrare/total*100*100)/100+"％) ";
+}
+</script>
+<table align="center">
+	<tr>
+		<td><img id="card00" src="takozara.jpg" width="150" height="200"></td>
+		<td><img id="card01" src="takozara.jpg" width="150" height="200"></td>
+		<td><img id="card02" src="takozara.jpg" width="150" height="200"></td>
+		<td><img id="card03" src="takozara.jpg" width="150" height="200"></td>
+		<td><img id="card04" src="takozara.jpg" width="150" height="200"></td>
+	</tr>
+</table>
+
+<div><a href="#" class="btn btn-solid-gold" onclick="gatcha()">ポチッ！</a></div>
+<div class="box1">
+<dl>
+	<dt>現在の課金額</dt>
+	<dd id="price">0円</dd>
+	<dt>レアの枚数（設定確率は50％）</dt>
+	<dd id="no_rare">0枚</dd>
+	<dt>スペシャルレアの枚数（設定確率は40％）</dt>
+	<dd id="no_ssrare">0枚</dd>
+	<dt>ウルトラスペシャルレアの枚数（設定確率は7％）</dt>
+	<dd id="no_usrare">0枚</dd>
+	<dt>超ウルトラスペシャルレアの枚数 (設定確立は3％) </dt>
+	<dd id="no_uusrare">0枚</dd>
+</dl>
+</div> 
+
+</body>
+</html>
